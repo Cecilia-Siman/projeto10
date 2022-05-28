@@ -1,36 +1,62 @@
 import React from "react" 
 import styled from 'styled-components';
-
+import axios from "axios";
 import { Link } from "react-router-dom";
+import { LoginContext } from "../Contexts/LoginComponent";
 
 export default function Register() {
+    const {email,setEmail,password,setPassword,userName,setUserName,image,setImage} = React.useContext(LoginContext);
+    function submitData(event) {
+        event.preventDefault();
+        const obj = {
+            email:email,
+            name:userName,
+            image:image,
+            password:password,
+        };
+        console.log(obj);
+        
+        const requisicao = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up',obj);
+        requisicao.then(alert("cadastrado!"));    
+        
+        setEmail("");
+        setUserName("");
+        setPassword("");
+        setImage("");
+
+    }
+
     return (
         <Container>
             <img width="180px" src="logo.png" alt="TrackIt logo"></img>
             <FormStyle>
-                <form>
+                <form onSubmit={submitData}>
                     <input 
                     type="email" 
                     id="email" 
-
+                    value = {email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                     placeholder="email"
                     />
                     <input 
                     type="password" 
-                    
+                    value = {password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                     placeholder="senha"
                     />
                     <input 
                     type="name" 
-                    
+                    value = {userName}
+                    onChange={(e) => setUserName(e.target.value)}
                     required
                     placeholder="nome"
                     />
                     <input 
                     type="url" 
-                    
+                    value={image}
+                    onChange={(e) => setImage(e.target.value)}
                     required
                     placeholder="foto"
                     />

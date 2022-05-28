@@ -1,25 +1,57 @@
 import React from "react" 
 import styled from 'styled-components';
-
+import axios from "axios";
 import { Link } from "react-router-dom";
+import { LoginContext } from "../Contexts/LoginComponent";
+
+import { useNavigate } from 'react-router-dom';
+
+
 
 
 export default function FirstPage() {
+
+    const {email,setEmail,password,setPassword,setImage,setUserName,image,userName,token,setToken} = React.useContext(LoginContext);
+    const navigate = useNavigate();
+    function submitData(event){
+        event.preventDefault();
+        const obj = {
+            email:email,
+            password:password,
+        };
+        
+        const requisicao = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login',obj);
+        requisicao.then(success);
+        function success(resp){ 
+            setImage(resp.data.image);
+            setUserName(resp.data.name); 
+            setToken(resp.data.token);
+            console.log(image,userName,token);
+            navigate('/habitos');
+        }
+        requisicao.catch(erro);  
+        function erro(){
+            alert("E-mail ou senha incorretos!")
+        }
+    }
+
     return (
         <Container>
             <img width="180px" src="logo.png" alt="TrackIt logo"></img>
             <FormStyle>
-                <form>
+                <form onSubmit={submitData}>
                     <input 
                     type="email" 
                     id="email" 
-
+                    value = {email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                     placeholder="email"
                     />
                     <input 
                     type="password" 
-                    
+                    value = {password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                     placeholder="senha"
                     />
