@@ -8,7 +8,6 @@ export default function ListingHabits(props){
     } 
     else{
         function RenderHabits(prop){
-            //console.log("prop",prop.name);
 
             /*function listDays(){
 
@@ -95,7 +94,6 @@ export default function ListingHabits(props){
     }
 }
 /*onClick={React.useEffect(() => {
-    console.log("teste");
     const config = {
         headers: { Authorization: `Bearer ${props.token}` }
     };

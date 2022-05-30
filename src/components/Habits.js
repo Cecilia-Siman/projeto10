@@ -22,16 +22,14 @@ export default function Habits() {
         const req = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits',config);
         req.then(su);
         function su(resp){ 
-            //console.log("deve estar vazio:"+resp.data);
             setHabitsList([...resp.data]);
         }
         req.catch(er);  
         function er(){
             alert("Deu erro");
-        }
-        //fim da lista de habitos     
+        }  
 	}, []);
-    //console.log("lista:",habitsList);
+    //fim da lista de habitos
 
     
     
@@ -51,8 +49,7 @@ export default function Habits() {
         </>
     )
 }
-/* {habitsList.length===0 ? <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p> : 
-                <ListingHabits />}*/ 
+
 
 const Container = styled.div`
     margin:92px 15px 100px 15px;

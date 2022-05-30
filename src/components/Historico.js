@@ -1,7 +1,5 @@
 import React from "react" 
 import styled from 'styled-components';
-import axios from "axios";
-import { Link } from "react-router-dom";
 import { LoginContext } from "../Contexts/LoginComponent";
 
 import TopBar from "./TopBar";
@@ -9,7 +7,7 @@ import Menu from "./Menu";
 
 
 export default function Historico() {
-    const {image,token,setToken} = React.useContext(LoginContext);
+    const {image} = React.useContext(LoginContext);
     
     return (
         <>

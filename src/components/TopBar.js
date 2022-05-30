@@ -1,11 +1,9 @@
 import React from "react" 
 import styled from 'styled-components';
 
-//import { LoginContext } from "../Contexts/LoginComponent";
 
 
 export default function TopBar(props) {
-    //const {image} = React.useContext(LoginContext);
     
     return(
         <Top>

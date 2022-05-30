@@ -38,7 +38,7 @@ export default function CreateHabit(props){
         nome = "";
     }
     return (
-        <div className={chosen ? "selected":"notSelected"} onClick={()=> {habitDays.push(props);setChosen(true);console.log(habitDays)} }>{nome}</div>
+        <div className={chosen ? "selected":"notSelected"} onClick={()=> {habitDays.push(props);setChosen(true)} }>{nome}</div>
     );
   }
 
@@ -88,10 +88,10 @@ export default function CreateHabit(props){
                 <SetDays/>
             </div>
             <div className="cancelar">
-                <span onClick={()=>props.close(true)}>cancelar</span>
+                <span onClick={()=>props.close(true)}>Cancelar</span>
             </div>
             <div onClick={()=>sendingNewHabit()} className="salvar">
-                <span>salvar</span>
+                <span>Salvar</span>
             </div>
             
         </Container>

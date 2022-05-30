@@ -11,11 +11,10 @@ import ListingTodayHabits from "./innerComponents/ListingTodayHabits"
 
 export default function Hoje() {
     const {image,token,setToken,habitsList, setHabitsList} = React.useContext(LoginContext);
-    const [newHabit,setNewHabit] = React.useState(true);
     const [todayHabits,setTodayHabits] = React.useState([]); 
     
     //inicio da lista de habitos
-    /*React.useEffect(() => {
+    React.useEffect(() => {
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
@@ -23,15 +22,14 @@ export default function Hoje() {
         request.then(success);
         function success(resposta){ 
             setTodayHabits([...resposta.data]);
-            console.log("ok",resposta.data);
+            console.log(":",resposta.data);
         }
         request.catch(erro);  
         function erro(){
             alert("Deu erro");
         }
         //fim da lista de habitos     
-	}, []);*/
-    //console.log("lista:",habitsList);
+	}, []);
 
     function Today (){
         let now = dayjs().format('dddd, DD/MM');
@@ -51,7 +49,6 @@ export default function Hoje() {
         <TopBar image={image} />
         <Container>
             <Today />
-            <p>hi</p>
             <ListingTodayHabits list={todayHabits} />
         </Container>
         <Menu/>
@@ -72,8 +69,7 @@ const Container = styled.div`
         line-height: 29px;
         color: #126BA5;
     }
-
-    p{
+    .previous{
         margin-top:34px;
         font-style: normal;
         font-weight: 400;
@@ -81,5 +77,7 @@ const Container = styled.div`
         line-height: 22px;
         color: #666666;
     }
+    
+
 
 `

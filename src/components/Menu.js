@@ -4,18 +4,22 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
 
 export default function Menu() {
     const navigate = useNavigate();
 
+    
     return(
         <BarMenu>
             <div className="bar">
                 <p onClick={()=>navigate('/habitos')}>Hábitos</p>
                 <p onClick={()=>navigate('/historico')}>Histórico</p>
             </div>
-            <div className="circle">
-                <p onClick={()=>navigate('/hoje')}>Hoje</p>
+            <div onClick={()=>navigate('/hoje')} className="circle">
+                <p >Hoje</p>
             </div>
         </BarMenu>
     )

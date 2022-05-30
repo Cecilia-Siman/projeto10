@@ -29,7 +29,6 @@ export default function FirstPage() {
             setImage(resposta.data.image);
             setUserName(resposta.data.name); 
             setToken(resposta.data.token);
-            console.log(image,userName,token);
             navigate('/habitos');
         }
         requisicao.catch(erro);  
@@ -37,7 +36,6 @@ export default function FirstPage() {
             alert("E-mail ou senha incorretos!")
         }
         //fim do login
-        console.log("token:",token);
 
     }
 
