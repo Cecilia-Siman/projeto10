@@ -10,8 +10,6 @@ export default function ListingHabits(props){
         return (<p className="previous">Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>)
     } 
     else{
-        
-        //return (<p className="previous">Deu certo!</p>)
         function RenderTodayHabits(prop){
 
             function MarkHabit(id,done){
@@ -79,19 +77,6 @@ export default function ListingHabits(props){
     }
 }
 
-/*                    function success(resp){ 
-                        const config = {
-                            headers: { Authorization: `Bearer ${props.token}` }
-                        };
-                        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today',config);
-                        request.then(success);
-                        function success(resposta){ 
-                            props.setList([...resposta.data]);
-                        }
-                        request.catch(erro);  
-                        function erro(){
-                            alert("Deu erro");
-                        } }*/
 
 const ListDays = styled.div `
 display:flex;

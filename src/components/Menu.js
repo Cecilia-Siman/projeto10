@@ -1,7 +1,6 @@
 import React from "react" 
 import styled from 'styled-components';
 
-import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 import { CircularProgressbar } from 'react-circular-progressbar';
@@ -16,7 +15,7 @@ export default function Menu(props) {
         return (
           <CircularProgressbar
             value={value}
-            circleRatio={1} /* Make the circle only 0.7 of the full diameter */
+            circleRatio={1}
             styles={{
               trail: {
                 strokeLinecap: "butt",

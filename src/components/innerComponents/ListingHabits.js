@@ -9,15 +9,6 @@ export default function ListingHabits(props){
     else{
         function RenderHabits(prop){
 
-            /*function listDays(){
-
-            }
-
-            function HabitDays(){
-            const returnDays = prop.days.map()
-            return returnDays;
-            }*/
-
             function Display(number) {
                 let nome;
                 let classe = "notSelected";
@@ -98,15 +89,6 @@ export default function ListingHabits(props){
         return listReturn;
     }
 }
-/*onClick={React.useEffect(() => {
-    const config = {
-        headers: { Authorization: `Bearer ${props.token}` }
-    };
-    axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${prop.id}`,config)
-    .then(()=> axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits',config)
-    .then((res)=>  props.setList([...res.data]))
-    )
-}, [])} */
 
 const ListDays = styled.div `
 display:flex;
