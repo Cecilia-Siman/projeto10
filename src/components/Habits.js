@@ -11,8 +11,17 @@ import ListingHabits from "./innerComponents/ListingHabits"
 
 
 export default function Habits() {
-    const {image,token,setToken,habitsList, setHabitsList,percent} = React.useContext(LoginContext);
+    const {setUserName,image,setImage,token,setToken,habitsList, setHabitsList,percent} = React.useContext(LoginContext);
     const [newHabit,setNewHabit] = React.useState(true); 
+    
+    const listaSerializada = localStorage.getItem("meusDados");
+    if (listaSerializada){
+        const dadosDeserializados = JSON.parse(listaSerializada);
+        console.log(dadosDeserializados);
+        setImage(dadosDeserializados.image);
+        setUserName(dadosDeserializados.name); 
+        setToken(dadosDeserializados.token);
+    }
     
     //inicio da lista de habitos
     React.useEffect(() => {

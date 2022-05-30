@@ -10,10 +10,19 @@ import ListingTodayHabits from "./innerComponents/ListingTodayHabits"
 
 
 export default function Hoje() {
-    const {image,token,setToken,habitsList, setHabitsList,percent,setPercent} = React.useContext(LoginContext);
+    const {setUserName,setImage,image,token,setToken,habitsList, setHabitsList,percent,setPercent} = React.useContext(LoginContext);
     const [todayHabits,setTodayHabits] = React.useState([]); 
     const [sumHabits,setSumHabits] = React.useState(0);
     const [sumDone,setSumDone] = React.useState(0);
+
+    const listaSerializada = localStorage.getItem("meusDados");
+    if (listaSerializada){
+        const dadosDeserializados = JSON.parse(listaSerializada);
+        console.log(dadosDeserializados);
+        setImage(dadosDeserializados.image);
+        setUserName(dadosDeserializados.name); 
+        setToken(dadosDeserializados.token);
+    }
     
     //inicio da lista de habitos
     React.useEffect(() => {

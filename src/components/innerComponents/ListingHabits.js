@@ -66,7 +66,8 @@ export default function ListingHabits(props){
                     return listreturn;
                 }
 
-            /*function deleteHabit(id){
+            function DeleteHabit(id){
+                if (window.confirm("Deseja apagar o hábito?") == true){
                 const config = {
                     headers: { Authorization: `Bearer ${props.token}` }
                 };
@@ -74,13 +75,17 @@ export default function ListingHabits(props){
                 .then(()=> axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits',config)
                 .then((res)=>  props.setList([...res.data]))
                 )
-            }*/
+                }
+            }
 
             return(
                 <>
                     <div className="habit" key={prop.id}>
                         <p className="title">{prop.name}</p>
-                        <ion-icon name="trash-outline" ></ion-icon>
+                        <div onClick={()=>DeleteHabit(prop.id)}>
+                            <ion-icon name="trash-outline" ></ion-icon>
+                        </div>
+                        
                         <ListDays>
                             <SetDays/>
                         </ListDays>

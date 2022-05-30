@@ -11,9 +11,19 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function FirstPage() {
+    
 
     const {email,setEmail,password,setPassword,setImage,setUserName,image,userName,token,setToken,habitsList, setHabitsList} = React.useContext(LoginContext);
     const navigate = useNavigate();
+    const listaSerializada = localStorage.getItem("meusDados");
+    if (listaSerializada){
+        const dadosDeserializados = JSON.parse(listaSerializada);
+        setImage(dadosDeserializados.image);
+        setUserName(dadosDeserializados.name); 
+        setToken(dadosDeserializados.token);
+        navigate('/habitos');
+    }
+    
     function submitData(event){
         event.preventDefault();
 
@@ -29,6 +39,10 @@ export default function FirstPage() {
             setImage(resposta.data.image);
             setUserName(resposta.data.name); 
             setToken(resposta.data.token);
+            
+            const dadosSerializados = JSON.stringify(resposta.data);
+            localStorage.setItem("meusDados", dadosSerializados); 
+
             navigate('/habitos');
         }
         requisicao.catch(erro);  
