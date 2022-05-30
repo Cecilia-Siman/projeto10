@@ -6,29 +6,76 @@ export default function CreateHabit(props){
     let habitDays = [];
     const [habitName,setHabitName] = React.useState("");
     const [objNewHabit, setObjNewHabit] = React.useState({});
+    const arrayDays = [7,1,2,3,4,5,6];
+
+   
+  function Display(props) {
+    let nome;
+    const [chosen, setChosen] = React.useState(false);
+    switch (props) {
+      case 7:
+        nome = "D";
+        break;
+      case 1:
+        nome = "S";
+        break;
+      case 2:
+        nome = "T";
+        break;
+      case 3:
+        nome = "Q";
+        break;
+      case 4:
+        nome = "Q";
+        break;
+      case 5:
+        nome = "S";
+        break;
+      case 6:
+        nome = "S";
+        break;
+      default:
+        nome = "";
+    }
+    return (
+        <div className={chosen ? "selected":"notSelected"} onClick={()=> {habitDays.push(props);setChosen(true);console.log(habitDays)} }>{nome}</div>
+    );
+  }
 
     function SetDays(){
-        const [colorBackground,setColorBackground] = React.useState(false);
-        return (
-            <>
-                <div className={colorBackground ? "selected": "notSelected"} onClick={()=> {habitDays.push(7);setColorBackground(true)} }>D</div>
-                <div className={colorBackground ? "selected": "notSelected"} onClick={()=> {habitDays.push(1);setColorBackground(true)} }>S</div>
-                <div className={colorBackground ? "selected": "notSelected"} onClick={()=> {habitDays.push(2);setColorBackground(true)} }>T</div>
-                <div className={colorBackground ? "selected": "notSelected"} onClick={()=> {habitDays.push(3);setColorBackground(true)} }>Q</div>
-                <div className={colorBackground ? "selected": "notSelected"} onClick={()=> {habitDays.push(4);setColorBackground(true)} }>Q</div>
-                <div className={colorBackground ? "selected": "notSelected"} onClick={()=> {habitDays.push(5);setColorBackground(true)} }>S</div>
-                <div className={colorBackground ? "selected": "notSelected"} onClick={()=> {habitDays.push(6);setColorBackground(true)} }>S</div>
-            </>
-        )
+        let lista = [7, 1, 2, 3, 4, 5, 6];
+        let listreturn = lista.map(Display);
+        return listreturn;
     }
     
-
-
     function sendingNewHabit(){
         if(habitDays.length !== 0 && habitName.length !==0){
             setObjNewHabit({name:habitName, days:habitDays});
-            console.log("objeto:"+ objNewHabit.name );
-            //{props.token};
+
+            const config = {
+                headers: { Authorization: `Bearer ${props.token}` }
+            };
+            const requisicao = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits',{name:habitName, days:habitDays},config);
+            requisicao.then(success);
+            function success(resp){ 
+                props.close(true);
+                const config = {
+                    headers: { Authorization: `Bearer ${props.token}` }
+                };
+                const req = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits',config);
+                req.then(su);
+                function su(res){ 
+                    props.setList([...res.data]);
+                }
+                req.catch(er);  
+                function er(){
+                    alert("Deu erro");
+                } 
+            }
+            requisicao.catch(erro);  
+            function erro(){
+                alert("Deu erro");
+            }
         } else{
             alert("Preencha corretamente!");
         }
@@ -36,9 +83,9 @@ export default function CreateHabit(props){
 
     return(
         <Container>
-            <input onChange={(e) => setHabitName(e.target.value)} placeholder="nome do hábito"></input>
+            <input value={habitName} onChange={(e) => setHabitName(e.target.value)} placeholder="nome do hábito"></input>
             <div className="listDays">
-                <SetDays />
+                <SetDays/>
             </div>
             <div className="cancelar">
                 <span onClick={()=>props.close(true)}>cancelar</span>
@@ -73,12 +120,25 @@ const Container = styled.div`
         height: 30px;
         border: solid 1px #D4D4D4;
         border-radius:5px;
-        color:#D4D4D4;
+        //color:#D4D4D4;
         margin-right:4px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+
+        font-family: 'Lexend Deca', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 19.976px;
+        line-height: 25px;
     }
+    .notSelected{
+        color: #DBDBDB;
+    }
+
     .selected{
         background:#CFCFCF;
-        color:#ffffff;
+        color:#ffffff;    
     }
     input{
         margin-top: 18px;

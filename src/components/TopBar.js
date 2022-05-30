@@ -9,13 +9,14 @@ export default function TopBar(props) {
     
     return(
         <Top>
-            <p className="trackIt">TrackIt</p>
+            <h1>TrackIt</h1>
             <img src={props.image} alt='user'></img>
         </Top>
     )
 }
 
 const Top = styled.div`
+    z-index:1;
     box-sizing:border-box;
     background-color: #126BA5;
     height: 70px;
@@ -28,14 +29,6 @@ const Top = styled.div`
     justify-content: space-between;
     align-items:center;
     padding:0px 18px;
-    p{
-        font-style: normal;
-        font-weight: 400;
-        font-size: 38.982px;
-        color: #FFFFFF;
-
-
-    }
     img{
         height:51px;
         width:51px;

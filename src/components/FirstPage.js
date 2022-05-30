@@ -9,12 +9,15 @@ import { useNavigate } from 'react-router-dom';
 
 
 
+
 export default function FirstPage() {
 
-    const {email,setEmail,password,setPassword,setImage,setUserName,image,userName,token,setToken} = React.useContext(LoginContext);
+    const {email,setEmail,password,setPassword,setImage,setUserName,image,userName,token,setToken,habitsList, setHabitsList} = React.useContext(LoginContext);
     const navigate = useNavigate();
     function submitData(event){
         event.preventDefault();
+
+        //início do login
         const obj = {
             email:email,
             password:password,
@@ -22,10 +25,10 @@ export default function FirstPage() {
         
         const requisicao = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login',obj);
         requisicao.then(success);
-        function success(resp){ 
-            setImage(resp.data.image);
-            setUserName(resp.data.name); 
-            setToken(resp.data.token);
+        function success(resposta){ 
+            setImage(resposta.data.image);
+            setUserName(resposta.data.name); 
+            setToken(resposta.data.token);
             console.log(image,userName,token);
             navigate('/habitos');
         }
@@ -33,7 +36,11 @@ export default function FirstPage() {
         function erro(){
             alert("E-mail ou senha incorretos!")
         }
+        //fim do login
+        console.log("token:",token);
+
     }
+
 
     return (
         <Container>
@@ -67,7 +74,10 @@ export default function FirstPage() {
 
 
 const Container = styled.div `
-margin-top:68px;
+min-height: 100vh;
+width:100%;
+background:#ffffff;
+padding-top:68px;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -102,6 +112,7 @@ margin-top:52px;
         border-radius: 5px;
         padding-left: 12px;
         &::placeholder{
+            font-family: 'Lexend Deca', sans-serif;
             font-style: normal;
             font-weight: 400;
             font-size: 19.976px;
@@ -110,13 +121,14 @@ margin-top:52px;
         }
     }
     button{
-        width: 303px;
+        width: 318px;
         height: 45px;
         background: #52B6FF;
         border-radius: 4.63636px;
         margin-bottom:24px;
 
         color:#ffffff;
+        font-family: 'Lexend Deca', sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 20.976px;

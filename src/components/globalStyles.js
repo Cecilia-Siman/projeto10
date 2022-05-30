@@ -53,6 +53,18 @@ table {
 body{
 	background-color: #F2F2F2;
 }
+
+h1{
+	font-family: 'Playball', cursive;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 38.982px;
+	color: #FFFFFF;
+}
+
+p, h2, span{
+	font-family: 'Lexend Deca', sans-serif;
+}
 `
 
 export default GlobalStyle;

@@ -72,7 +72,10 @@ export default function Register() {
 
 
 const Container = styled.div `
-margin-top:68px;
+min-height: 100vh;
+width:100%;
+background:#ffffff;
+padding-top:68px;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -115,13 +118,14 @@ margin-top:52px;
         }
     }
     button{
-        width: 303px;
+        width: 318px;
         height: 45px;
         background: #52B6FF;
         border-radius: 4.63636px;
         margin-bottom:24px;
 
         color:#ffffff;
+        font-family: 'Lexend Deca', sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 20.976px;

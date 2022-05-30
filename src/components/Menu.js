@@ -12,10 +12,10 @@ export default function Menu() {
         <BarMenu>
             <div className="bar">
                 <p onClick={()=>navigate('/habitos')}>Hábitos</p>
-                <p onClick={()=>navigate('/historico')}>Hitórico</p>
+                <p onClick={()=>navigate('/historico')}>Histórico</p>
             </div>
             <div className="circle">
-                <p>Hoje</p>
+                <p onClick={()=>navigate('/hoje')}>Hoje</p>
             </div>
         </BarMenu>
     )
