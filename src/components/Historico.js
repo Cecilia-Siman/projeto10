@@ -7,7 +7,7 @@ import Menu from "./Menu";
 
 
 export default function Historico() {
-    const {image} = React.useContext(LoginContext);
+    const {image,percent} = React.useContext(LoginContext);
     
     return (
         <>
@@ -16,7 +16,7 @@ export default function Historico() {
                 <h2>Histórico</h2>
                 <p>Em breve você poderá ver o histórico dos seus hábitos aqui!</p>
             </Container>
-            <Menu />
+            <Menu percent={percent}/>
         </>
     )
 }

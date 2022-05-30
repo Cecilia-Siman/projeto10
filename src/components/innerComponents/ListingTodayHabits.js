@@ -3,21 +3,71 @@ import styled from 'styled-components'
 import axios from "axios"
 
 export default function ListingHabits(props){
+
+    
+
     if (props.list.length === 0){
         return (<p className="previous">Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>)
     } 
     else{
+        
         //return (<p className="previous">Deu certo!</p>)
         function RenderTodayHabits(prop){
+
+            function MarkHabit(id,done){
+                const config = {
+                    headers: { Authorization: `Bearer ${props.token}` }
+                };
+                if (!done){
+
+                    const requisicao = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`,{}, config);
+                    requisicao.then(success);
+                    function success(){
+                        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today',config);
+                        request.then(success);
+                        function success(resposta){ 
+                            props.setList([...resposta.data]);
+                        }
+                        request.catch(erro);  
+                        function erro(){
+                            alert("Deu erro");
+                        }
+                    }        
+                    
+                    requisicao.catch(erro);  
+                    function erro(){
+                        alert("Deu erro");
+                    }
+                } else{
+                    const req = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`,{}, config);
+                    req.then(success);
+                    function success(){
+                        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today',config);
+                        request.then(success);
+                        function success(resposta){ 
+                            props.setList([...resposta.data]);
+                        }
+                        request.catch(erro);  
+                        function erro(){
+                            alert("Deu erro");
+                        }
+                    }        
+                    
+                    req.catch(erro);  
+                    function erro(){
+                        alert("Deu erro");
+                    }
+                }
+            }
             return(
                 <>
                     <Habitos key={prop.id}>
                         <p className="title">{prop.name}</p>
-                        <button>
+                        <button className={(prop.done ? "selected" : "notSelected")} onClick={()=>MarkHabit(prop.id,prop.done)}>
                         <ion-icon name="checkmark-outline"></ion-icon>
-                        </button>
+                        </button >
                         <div>
-                            <p>Sequência atual: {prop.currentSequence}</p>
+                            <p className={(prop.done ? "finishedSeq" : "unfinishedSeq")}>Sequência atual: {prop.currentSequence}</p>
                             <p>Seu recorde: {prop.highestSequence}</p>
                         </div>
                     </Habitos>
@@ -28,6 +78,20 @@ export default function ListingHabits(props){
         return listReturn;
     }
 }
+
+/*                    function success(resp){ 
+                        const config = {
+                            headers: { Authorization: `Bearer ${props.token}` }
+                        };
+                        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today',config);
+                        request.then(success);
+                        function success(resposta){ 
+                            props.setList([...resposta.data]);
+                        }
+                        request.catch(erro);  
+                        function erro(){
+                            alert("Deu erro");
+                        } }*/
 
 const ListDays = styled.div `
 display:flex;
@@ -71,8 +135,14 @@ const Habitos = styled.div `
         right: 12px;
         top: 12px;
 
-        background: #E7E7E7;
+        
         border-radius: 5px;
+    }
+    .selected{
+        background: #8FC549;
+    }
+    .notSelected{
+        background: #E7E7E7;
     }
     ion-icon{
         font-size:50px;
@@ -93,6 +163,9 @@ const Habitos = styled.div `
         line-height: 16px;
 
         color: #666666;
+    }
+    .finishedSeq{
+        color:#8FC549;
     }
 
 `

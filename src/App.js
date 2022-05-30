@@ -17,9 +17,10 @@ export default function App() {
     const [image,setImage] = React.useState('');
     const [token,setToken] = React.useState('');
     const [habitsList, setHabitsList] = React.useState([]);
+    const [percent,setPercent] = React.useState(0);
 
     return (
-        <LoginContext.Provider value={{email,setEmail,password,setPassword,userName,setUserName,image,setImage,token,setToken,habitsList, setHabitsList}}>            
+        <LoginContext.Provider value={{email,setEmail,password,setPassword,userName,setUserName,image,setImage,token,setToken,habitsList, setHabitsList,percent,setPercent}}>            
             <GlobalStyle />
             <BrowserRouter>
                 <Routes>

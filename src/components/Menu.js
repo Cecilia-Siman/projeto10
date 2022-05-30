@@ -8,8 +8,34 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 
-export default function Menu() {
+export default function Menu(props) {
     const navigate = useNavigate();
+
+    function Progresso() {
+        let value = props.percent;
+        return (
+          <CircularProgressbar
+            value={value}
+            circleRatio={1} /* Make the circle only 0.7 of the full diameter */
+            styles={{
+              trail: {
+                strokeLinecap: "butt",
+                transform: "rotate(-126deg)",
+                transformOrigin: "center center",
+                stroke:"hsla(205, 100%, 66%, 1)",
+              },
+              path: {
+                transformOrigin: "center center",
+                stroke: "hsla(0, 0%, 100%, 1)"
+              },
+              text: {
+                fill: "#ddd"
+              }
+            }}
+            strokeWidth={10}
+          />
+        );
+      }
 
     
     return(
@@ -19,7 +45,10 @@ export default function Menu() {
                 <p onClick={()=>navigate('/historico')}>Histórico</p>
             </div>
             <div onClick={()=>navigate('/hoje')} className="circle">
-                <p >Hoje</p>
+                <div>
+                    <Progresso />
+                    <p >Hoje</p>
+                </div>
             </div>
         </BarMenu>
     )
@@ -65,5 +94,15 @@ const BarMenu = styled.div`
         display:flex;
         justify-content:center;
         align-items:center;
+        
+    }
+    .circle div{
+        position:relative;
+        padding:5px;
+    }
+    .circle p{
+        position:absolute;
+        top:35px;
+        left:25px;
     }
 `

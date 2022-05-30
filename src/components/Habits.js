@@ -11,7 +11,7 @@ import ListingHabits from "./innerComponents/ListingHabits"
 
 
 export default function Habits() {
-    const {image,token,setToken,habitsList, setHabitsList} = React.useContext(LoginContext);
+    const {image,token,setToken,habitsList, setHabitsList,percent} = React.useContext(LoginContext);
     const [newHabit,setNewHabit] = React.useState(true); 
     
     //inicio da lista de habitos
@@ -45,7 +45,7 @@ export default function Habits() {
                 <ListingHabits list={habitsList} token={token} setList={setHabitsList}/>
                 
             </Container>
-            <Menu />
+            <Menu percent={percent} />
         </>
     )
 }
